@@ -1,0 +1,34 @@
+    Device: add event type "EVENT_LEAVE_NETWORK = 7" and "EVENT_ENTER_NETWORK = 8"
+    declared the use of a new handler for this kind of events
+
+    change the way we check for a message to be fully received,
+    to take in consideration the possibility of missing some of the intermediary messages, (maybe within the TransferInfo Class?)
+
+    check not only for the energy remaining when a message is received or send, but also for the remaining time this device
+    will be connected to the network. check also in queueMessageTransfer. Is it okey to check for remaining time for
+    simulation purposes? or we should implement another way to manage events and messages to a node already
+    disconnected (Timers in the messages or use the ping of SOC like an advertisement of connection)
+
+    add the cases for the previous ones type of event to the method processEvent
+
+    add a method onConnectionToNetwork having as reference the one called onStartup()
+
+    add a method onDisconnectFromNetwork having as reference the one called onBatteryDepletion()
+
+    class Message looks okey
+    class Link looks okey
+    class Job looks okey
+
+    maybe methods onCouldNotReceiveMessage(Message<T> message),
+    onCouldNotSendMessage(TransferInfo<T> transferInfo), onMessageSentFailedToArrive(Message<T> message)
+    , of MessageHandler could be usefull for failed messages because a disconnect event
+
+	in NetworkModel private static double AckMessageSizeInBytes = 0; ??????????????????
+
+    for the scheduler:
+
+        we could use the wifi signal strength as reference for estimate the remaining connected time of a device, but is not a fateful way.
+
+        we also could use an historical log of connected time to estimate the remaining time until a disconnect event,
+        taken in care that people usually be in the same places for the same amount of time at the same time every day
+

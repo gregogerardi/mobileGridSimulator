@@ -31,7 +31,9 @@ public class Device extends Entity implements Node, DeviceListener {
 	public static final int EVENT_TYPE_DEVICE_START = 3;
 	public static final int EVENT_TYPE_STATUS_NOTIFICATION = 4;
 	public static final int EVENT_TYPE_SCREEN_ACTIVITY = 5;
-	public static final int EVENT_NETWORK_ACTIVITY = 6;
+    public static final int EVENT_NETWORK_ACTIVITY = 6;
+    public static final int EVENT_LEAVE_NETWORK = 7;
+    public static final int EVENT_ENTER_NETWORK = 8;
 
 	/* Size of message buffer for transfers in bytes */
 	public static int MESSAGES_BUFFER_SIZE = 1024 * 1024; // 1mb
@@ -80,7 +82,12 @@ public class Device extends Entity implements Node, DeviceListener {
     /**
      * Helper for handling all logic related to battery depletion.
      */
-	protected BatteryManager batteryManager;
+    protected BatteryManager batteryManager;
+
+    /**
+     * Helper for handling all logic related to enter and leave the network anytime.
+     */
+    //protected ConectionManager conectionManager;
 
     /**
      * Helper for handling job execution simulation based on available CPU.
@@ -500,7 +507,7 @@ public class Device extends Entity implements Node, DeviceListener {
 
 		return (networkEnergyManager.getAccEnergyInTransfering() * 100) / initialJoules;
 	}
-
+//hasta aca indice libro
     /**
      * Returns the state of charge of the device when it joined the grid as a value between 0 and 10.000.000,
      * where the latter means 100%.
